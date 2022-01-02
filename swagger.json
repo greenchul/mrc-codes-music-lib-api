@@ -15,8 +15,8 @@
   "schemes": ["http", "https"],
   "tags": [
     {
-      "name": "Artists",
-      "description": "Endpoints for interacting with artists"
+      "name": "Music Library",
+      "description": "Endpoints for interacting with artists and albums"
     }
   ],
   "paths": {
