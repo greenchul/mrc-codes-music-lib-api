@@ -17,9 +17,11 @@ const envFile = args === 'test' ? '../.env.test' : '../.env';
 //     path: path.join(__dirname, envFile),
 //   });
 // }
-require('dotenv').config({
-  path: path.join(__dirname, envFile),
-});
+if (args === 'test') {
+  require('dotenv').config({
+    path: path.join(__dirname, envFile),
+  });
+}
 
 // destructure environment variables from process.env
 const {
