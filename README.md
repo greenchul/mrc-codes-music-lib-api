@@ -4,7 +4,7 @@
 
 The Music library API project as part of the Manchester Codes curriculum (back-end module).
 
-The project is live [here](https://music-library-rs.herokuapp.com/api-docs/)
+The project is live [here](http://music-library-rs.herokuapp.com/api-docs/)
 
 The project implements RESTful routes and allows users to perform CRUD (Create, Read, Update, Delete) operations on artist and albums in a MySQL database.
 
