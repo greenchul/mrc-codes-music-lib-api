@@ -5,7 +5,6 @@ const createArtistController = async (req, res) => {
   const artistName = req.body.name;
   const artistGenre = req.body.genre;
   try {
-    console.log(artistName, artistGenre);
     await db.query(
       `INSERT INTO Artist (name, genre)
     VALUES (?, ?)`,
@@ -25,7 +24,6 @@ const readArtistController = async (req, res) => {
     const [artists] = result;
     res.status(200).send(artists);
   } catch (err) {
-    console.log(err);
     res.status(500).json(err);
   }
   db.close();
@@ -39,7 +37,6 @@ const readSingleArtistController = async (req, res) => {
     const [[artist]] = result;
     return artist ? res.status(200).send(artist) : res.sendStatus(404);
   } catch (err) {
-    console.log(err);
     res.status(500).json(err);
   }
   db.close();
@@ -65,7 +62,6 @@ const updatingArtistController = async (req, res) => {
       res.sendStatus(404);
     }
   } catch (err) {
-    console.log(err);
     res.status(500).json(err);
   }
 

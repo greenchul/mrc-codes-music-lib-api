@@ -8,10 +8,8 @@ describe('update artist', () => {
   let db;
   let artists;
   beforeEach(async () => {
-    //before each test get the db
     db = await getDb();
-    // insert the following record in to the artist table
-    //Promise.all takes an array of promises
+
     await Promise.all([
       db.query('INSERT INTO Artist (name, genre) VALUES(?,?)', [
         'Halestorm',
@@ -26,7 +24,7 @@ describe('update artist', () => {
         'alternative',
       ]),
     ]);
-    // array destructuring, will take the first array from the array of arrays
+
     [artists] = await db.query('SELECT * FROM Artist');
   });
 
@@ -44,10 +42,8 @@ describe('update artist', () => {
           .patch(`/artist/${artist.id}`)
           .send({ name: 'test name', genre: 'test genre' });
 
-        //expect the status code to be 200
         expect(result.status).to.equal(200);
 
-        // expect artist to be {name: "test name", genre: "test genre"}
         const [[updatedArtist]] = await db.query(
           `SELECT * FROM Artist Where id=?`,
           [artistID]

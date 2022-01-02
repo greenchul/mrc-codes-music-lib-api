@@ -2,13 +2,13 @@
 
 ## About
 
-The Music libraby API project as part of the Manchester Codes curriculum (back-end module).
+The Music library API project as part of the Manchester Codes curriculum (back-end module).
 
 The project implements RESTful routes and allows users to perform CRUD (Create, Read, Update, Delete) operations on artist and albums in a MySQL database.
 
 The project was built with Node and Express and uses SQL to interact with the database.
 
-Test Driven Development was used throughout the project with Mocha, Chia and Supertest used for itergation testing.
+Test Driven Development was used throughout the project with Mocha, Chia and Supertest used for itergration testing.
 
 ![Screenshot of database schema](https://github.com/greenchul/greenchul/blob/main/assets/music-lib-schema.png)
 
@@ -17,7 +17,7 @@ Test Driven Development was used throughout the project with Mocha, Chia and Sup
 - Pull a MySQL image and run the container
 - Clone this repo
 - Change in to repo directory
-- Run NPM install
+- Run `npm install`
 - Create a .env file and add local variables:
   - DB_PASSWORD
   - DB_NAME
@@ -26,8 +26,8 @@ Test Driven Development was used throughout the project with Mocha, Chia and Sup
   - DB_PORT
   - PORT
 - If you wan to run the tests create a .env.test file with the same environmental variables changing the DB_NAME variable.
-- Run NPM start to start the project
-- Run NPM test to run the tests
+- Run `npm start` to start the project
+- Run `npm test` to run the tests
 
 ## Routes
 
@@ -43,6 +43,6 @@ Test Driven Development was used throughout the project with Mocha, Chia and Sup
 
 - Create: POST to /artist/id/album
 - Read all: GET to /album
-- Read single" GET to /album/:id
+- Read single: GET to /album/:id
 - Update: PATCH to /album/:id
 - Delete: DELETE to /album/:id

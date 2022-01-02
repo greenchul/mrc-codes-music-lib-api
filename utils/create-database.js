@@ -12,11 +12,14 @@ const args = process.argv.slice(2)[0];
 const envFile = args === 'test' ? '../.env.test' : '../.env';
 
 // load environment variables from env files
-if (args === 'test') {
-  require('dotenv').config({
-    path: path.join(__dirname, envFile),
-  });
-}
+// if (args === 'test') {
+//   require('dotenv').config({
+//     path: path.join(__dirname, envFile),
+//   });
+// }
+require('dotenv').config({
+  path: path.join(__dirname, envFile),
+});
 
 // destructure environment variables from process.env
 const {

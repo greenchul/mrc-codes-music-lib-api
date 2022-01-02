@@ -37,9 +37,9 @@ describe('read artist', () => {
     describe('GET', () => {
       it('returns all astist records in the database', async () => {
         const result = await request(app).get('/artist');
-        // console.log(result.body);
+
         expect(result.status).to.equal(200);
-        // result.body should be an array of artist objects
+
         expect(result.body.length).to.equal(3);
 
         result.body.forEach((record) => {
@@ -56,7 +56,6 @@ describe('read artist', () => {
   describe('/artist/:artistId', () => {
     describe('GET', () => {
       it('Should return a single artist with the correct ID', async () => {
-        // Will select one artist to test
         const expectedArtist = artists[0];
         const expectedArtistId = expectedArtist.id;
 
