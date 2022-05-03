@@ -17,44 +17,53 @@ const envFile = args === 'test' ? '../.env.test' : '../.env';
 //     path: path.join(__dirname, envFile),
 //   });
 // }
-if (args === 'test') {
-  require('dotenv').config({
-    path: path.join(__dirname, envFile),
-  });
-}
+
+// if (args === 'test') {
+//   require('dotenv').config({
+//     path: path.join(__dirname, envFile),
+//   });
+// }
+
+require('dotenv').config({
+  path: path.join(__dirname, envFile),
+});
 
 // destructure environment variables from process.env
-const {
-  DB_PASSWORD,
-  DB_NAME,
-  DB_USER,
-  DB_HOST,
-  DB_PORT,
-  CLEARDB_DATABASE_URL,
-} = process.env;
+const { DB_PASSWORD, DB_NAME, DB_USER, DB_HOST, DB_PORT } = process.env;
 
 // This asyncronous function will run before app
 const setUpDatabase = async () => {
   try {
     // connect to the database
-    const db = CLEARDB_DATABASE_URL
-      ? await mysql.createConnection(CLEARDB_DATABASE_URL)
-      : await mysql.createConnection({
-          host: DB_HOST,
-          user: DB_USER,
-          password: DB_PASSWORD,
-          port: DB_PORT,
-        });
+
+    // const db = CLEARDB_DATABASE_URL
+    //   ? await mysql.createConnection(CLEARDB_DATABASE_URL)
+    //   : await mysql.createConnection({
+    //       host: DB_HOST,
+    //       user: DB_USER,
+    //       password: DB_PASSWORD,
+    //       port: DB_PORT,
+    //     });
+
+    const db = await mysql.createConnection({
+      host: DB_HOST,
+      user: DB_USER,
+      password: DB_PASSWORD,
+      port: DB_PORT,
+    });
 
     // create the database if it doesn't already exist
-    !CLEARDB_DATABASE_URL &&
-      (await db.query(`CREATE DATABASE IF NOT EXISTS ${DB_NAME}`));
-    !CLEARDB_DATABASE_URL && (await db.query(`USE ${DB_NAME}`));
-    await db.query(`CREATE TABLE IF NOT EXISTS Artist (
-      id INT PRIMARY KEY auto_increment,
-      name VARCHAR(25),
-      genre VARCHAR(25)
-    )`);
+    // !CLEARDB_DATABASE_URL &&
+    //   (await db.query(`CREATE DATABASE IF NOT EXISTS ${DB_NAME}`));
+    // !CLEARDB_DATABASE_URL && (await db.query(`USE ${DB_NAME}`));
+    // await db.query(`CREATE TABLE IF NOT EXISTS Artist (
+    //   id INT PRIMARY KEY auto_increment,
+    //   name VARCHAR(25),
+    //   genre VARCHAR(25)
+    // )`);
+
+    await db.query(`CREATE DATABASE IF NOT EXISTS ${DB_NAME}`);
+    await db.query(`USE ${DB_NAME}`);
 
     await db.query(`CREATE TABLE IF NOT EXISTS Album (
       id INT PRIMARY KEY auto_increment,
@@ -65,6 +74,15 @@ const setUpDatabase = async () => {
       REFERENCES Artist (id)
     );`);
 
+    // db.close();
+
+    await db.query(`CREATE DATABASE IF NOT EXISTS ${DB_NAME}`);
+    await db.query(`USE ${DB_NAME}`);
+    await db.query(`CREATE TABLE IF NOT EXISTS Artist(
+      id INT PRIMARY KEY auto_increment,
+      name VARCHAR(25),
+      genre VARCHAR(25)
+    )`);
     db.close();
   } catch (err) {
     // if something goes wrong, console.log the error and the current environment variables
